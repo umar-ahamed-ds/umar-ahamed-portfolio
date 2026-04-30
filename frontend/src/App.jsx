@@ -1,11 +1,17 @@
+import Navbar from './components/Navbar';
+import Home from './sections/Home';
+import Projects from './sections/Projects';
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#000919]">
-      <h1 className="text-5xl font-bold text-[#0A6ED3]">
-        Portfolio Setup Done 🚀
-      </h1>
+    <div className="min-h-screen bg-[#000919] text-white selection:bg-[#0A6ED3] selection:text-white">
+      <Navbar />
+      <main>
+        <Home />
+        <Projects />
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
