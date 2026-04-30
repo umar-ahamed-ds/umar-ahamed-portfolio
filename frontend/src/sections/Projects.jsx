@@ -4,95 +4,48 @@ import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import { FaGithub, FaExternalLinkAlt, FaPlay, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const projects = [
-  {
-    id: 1,
-    title: "Data Warehousing & Business Intelligence Project",
-    category: ["Data Engineering", "BI & Analytics"],
-    description: "Designed and implemented a complete Data Warehouse and BI solution using an Anti-Money Laundering dataset.",
-    highlights: ["Star Schema Design", "ETL using SSIS", "SCD Type 2 implementation", "SSAS Cube for OLAP", "Power BI dashboards"],
-    github: "https://github.com/umar-ahamed-ds/DWBI-AML-Transaction-Data-Warehouse.git",
-    images: 4,
-    featured: false
-  },
-  {
-    id: 2,
-    title: "Smart Campus 360",
-    category: ["Full-Stack"],
-    description: "A production-inspired university management system integrating booking, ticketing, and notification workflows.",
-    highlights: ["Resource & Asset Management", "Booking system with conflict detection", "Ticket management with technician assignment", "OAuth2 + 2FA authentication"],
-    tech: ["React", "Spring Boot", "MySQL"],
-    github: "https://github.com/gima2003/it3030-paf-2026-smart-campus-groupY3S1_WD_99.git",
-    video: true,
-    images: 1,
-    featured: true
-  },
-  {
-    id: 3,
-    title: "Statistical Analysis Project",
-    category: ["Machine Learning", "Data Analysis"],
-    description: "Analyzed learning engagement vs knowledge retention using statistical modelling.",
-    highlights: ["Regression modelling", "Hypothesis testing", "Feature selection", "Data visualization"],
-    github: "https://github.com/umar-ahamed-ds/TPSM-Assignment.git",
-    images: 4,
-    featured: false
-  },
-  {
-    id: 4,
-    title: "FarmNex Smart Farm System",
-    category: ["Full-Stack", "IoT"],
-    description: "An IoT-powered smart farming platform with chatbot, payment, and inventory management.",
-    tech: ["MERN Stack", "Stripe", "IoT"],
-    github: "https://github.com/Tharakax/FarmNex.git",
-    images: 10,
-    featured: false
-  },
-  {
-    id: 5,
-    title: "Vehicle Rental System",
-    category: ["Full-Stack", "Java"],
-    description: "A CRUD-based rental system demonstrating OOP concepts with database integration.",
-    tech: ["Java", "MySQL", "JDBC"],
-    github: "https://github.com/umar-ahamed-ds/SpeedWheelsVehicleRentalSystem.git",
-    video: true,
-    images: 1,
-    featured: false
-  },
-  {
-    id: 6,
-    title: "Personal Wellness Tracker",
-    category: ["Mobile"],
-    description: "Android app for habit tracking, mood journaling, and hydration reminders.",
-    tech: ["Kotlin", "Android Studio"],
-    github: "https://github.com/umar-ahamed-ds/personal-wellness-tracker-android-mobile.git",
-    images: 3,
-    featured: false
-  },
-  {
-    id: 7,
-    title: "Burger Xpress Mobile App",
-    category: ["Mobile"],
-    description: "A mobile food ordering app with customization, payment, and tracking features.",
-    tech: ["Java/Kotlin", "Android"],
-    github: "https://github.com/umar-ahamed-ds/burger-xpress-food-ordering-android.git",
-    images: 4,
-    featured: false
-  }
-];
+import { projects } from '../data/projectsData';
 
 const categories = ["All", "Full-Stack", "Data Engineering", "Machine Learning", "BI & Analytics", "Mobile"];
 
-const ImageSlider = ({ numImages }) => {
+const ImageSlider = ({ images, videoUrl }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const numImages = images?.length || 0;
 
   const nextSlide = () => setCurrentIndex((prev) => (prev === numImages - 1 ? 0 : prev + 1));
   const prevSlide = () => setCurrentIndex((prev) => (prev === 0 ? numImages - 1 : prev - 1));
 
-  if (numImages <= 1) {
+  if (numImages === 0 && videoUrl) {
+    return (
+      <div className="w-full h-48 sm:h-64 bg-brand-blue/10 flex items-center justify-center relative overflow-hidden group">
+        <video 
+          src={videoUrl} 
+          className="w-full h-full object-cover"
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        />
+        <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 to-brand-gold/10 mix-blend-overlay"></div>
+      </div>
+    );
+  }
+
+  if (numImages === 0) {
     return (
       <div className="w-full h-48 sm:h-64 bg-brand-blue/10 flex items-center justify-center relative overflow-hidden group">
         <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 to-brand-gold/10 mix-blend-overlay"></div>
         <FaExternalLinkAlt className="text-brand-blue/40 text-4xl group-hover:scale-110 transition-transform" />
+      </div>
+    );
+  }
+
+  if (numImages === 1) {
+    return (
+      <div className="w-full h-48 sm:h-64 bg-brand-blue/10 flex items-center justify-center relative overflow-hidden group">
+        <img src={images[0]} alt="Project" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 to-brand-gold/10 mix-blend-overlay"></div>
       </div>
     );
   }
@@ -108,22 +61,22 @@ const ImageSlider = ({ numImages }) => {
           transition={{ duration: 0.3 }}
           className="absolute inset-0 flex items-center justify-center bg-brand-blue/10"
         >
-           <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 to-brand-gold/10 mix-blend-overlay"></div>
-           <span className="text-brand-blue/50 font-bold text-xl">Image {currentIndex + 1} / {numImages}</span>
+          <img src={images[currentIndex]} alt={`Project ${currentIndex + 1}`} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 to-brand-gold/10 mix-blend-overlay"></div>
         </motion.div>
       </AnimatePresence>
       
       <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button onClick={prevSlide} className="p-2 rounded-full glass-card hover:bg-brand-blue/30 text-white transition-colors">
+        <button onClick={prevSlide} className="p-2 rounded-full glass-card hover:bg-brand-blue/30 text-white transition-colors z-10">
           <FaChevronLeft size={14} />
         </button>
-        <button onClick={nextSlide} className="p-2 rounded-full glass-card hover:bg-brand-blue/30 text-white transition-colors">
+        <button onClick={nextSlide} className="p-2 rounded-full glass-card hover:bg-brand-blue/30 text-white transition-colors z-10">
           <FaChevronRight size={14} />
         </button>
       </div>
       
-      <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
-        {Array.from({ length: numImages }).map((_, idx) => (
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-10">
+        {images.map((_, idx) => (
           <div 
             key={idx} 
             className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-brand-gold glow-gold' : 'w-1.5 bg-gray-500'}`}
@@ -136,6 +89,7 @@ const ImageSlider = ({ numImages }) => {
 
 export default function Projects() {
   const [filter, setFilter] = useState("All");
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const filteredProjects = projects.filter(p => 
     filter === "All" ? true : p.category.includes(filter)
@@ -238,7 +192,7 @@ export default function Projects() {
                       </span>
                     </div>
                   )}
-                  <ImageSlider numImages={project.images} />
+                  <ImageSlider images={project.images} videoUrl={project.videoUrl} />
                 </div>
 
                 {/* Content Section */}
@@ -297,13 +251,16 @@ export default function Projects() {
                       <FaGithub className="mr-2" size={16} /> GitHub
                     </a>
                     
-                    {project.video && (
-                      <button className="flex items-center text-sm font-semibold text-gray-300 hover:text-brand-blue transition-colors ml-4">
-                        <FaPlay className="mr-2 text-brand-blue" size={14} /> View Video
+                    {project.videoUrl && (
+                      <button 
+                        onClick={() => setSelectedVideo(project.videoUrl)}
+                        className="flex items-center text-sm font-semibold text-gray-300 hover:text-brand-blue transition-colors ml-4"
+                      >
+                        <FaPlay className="mr-2 text-brand-blue" size={14} /> View {project.videoUrl.includes('ProjectDemo') ? 'Demo' : 'Video'}
                       </button>
                     )}
                     
-                    {!project.video && (
+                    {!project.videoUrl && (
                        <button className="flex items-center text-sm font-semibold text-gray-300 hover:text-brand-blue transition-colors ml-4">
                          <FaExternalLinkAlt className="mr-2 text-brand-blue" size={14} /> Live Demo
                        </button>
@@ -315,6 +272,39 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
 
+        {/* Video Modal */}
+        <AnimatePresence>
+          {selectedVideo && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+              onClick={() => setSelectedVideo(null)}
+            >
+              <motion.div 
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                className="relative w-full max-w-4xl bg-brand-bg border border-brand-blue/30 rounded-2xl overflow-hidden glass-card shadow-2xl"
+                onClick={e => e.stopPropagation()}
+              >
+                <button 
+                  onClick={() => setSelectedVideo(null)}
+                  className="absolute top-4 right-4 text-white hover:text-brand-gold z-10 bg-black/50 w-10 h-10 flex items-center justify-center rounded-full transition-colors"
+                >
+                  ✕
+                </button>
+                <video 
+                  src={selectedVideo} 
+                  className="w-full h-auto max-h-[80vh] outline-none"
+                  controls 
+                  autoPlay 
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
