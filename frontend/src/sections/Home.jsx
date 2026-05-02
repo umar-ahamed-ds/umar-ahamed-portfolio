@@ -69,27 +69,27 @@ export default function Home() {
       <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#0a6ed31a_1px,transparent_1px),linear-gradient(to_bottom,#0a6ed31a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none opacity-20"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex-grow flex flex-col justify-center pb-20">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Side: Profile & Details */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-4 flex flex-col items-center lg:items-start space-y-6"
           >
             <div className="relative">
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 rounded-full border-2 border-brand-blue/50 animate-pulse-glow"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1.1 }}
                 transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
               ></motion.div>
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-brand-gold/80 glow-gold animate-float relative z-10 bg-brand-bg p-1">
-                <img 
-                  src={profileImg} 
-                  alt="Umar Ahamed" 
+                <img
+                  src={profileImg}
+                  alt="Umar Ahamed"
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
@@ -107,9 +107,9 @@ export default function Home() {
                 { Icon: FaLinkedin, href: "https://www.linkedin.com/in/umar-ahamed-" },
                 { Icon: FaEnvelope, href: "mailto:umarahamed852@gmail.com" }
               ].map(({ Icon, href }, idx) => (
-                <motion.a 
+                <motion.a
                   key={idx}
-                  href={href} 
+                  href={href}
                   target="_blank"
                   rel="noreferrer"
                   whileHover={{ scale: 1.2, y: -5 }}
@@ -123,32 +123,32 @@ export default function Home() {
 
           {/* Center/Right: Headline & Cards */}
           <div className="lg:col-span-8 flex flex-col lg:items-end text-center lg:text-right space-y-10">
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="w-full"
             >
               <h1 className="text-5xl md:text-7xl font-black text-white leading-tight tracking-tighter mb-4">
-                DATA <span className="text-brand-gold glow-text-gold">SCIENCE</span> <br className="hidden md:block"/>
+                DATA <span className="text-brand-gold glow-text-gold">SCIENCE</span> <br className="hidden md:block" />
                 <span className="text-3xl md:text-4xl tracking-[0.2em] font-light text-gray-400 my-2 block">MEETS</span>
                 SOFTWARE <span className="text-brand-gold glow-text-gold">ENGINEERING</span>
               </h1>
               <p className="text-xl text-gray-300 max-w-2xl lg:ml-auto">
                 Building intelligent solutions through data and code
               </p>
-              
+
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-end space-y-4 sm:space-y-0 sm:space-x-6">
-                <motion.button 
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-3 rounded-md bg-brand-blue text-white font-bold tracking-wide hover:bg-blue-600 transition-colors glow-blue"
                 >
                   Explore Projects
                 </motion.button>
-                <motion.a 
-                  href="/CV/Umar CV DS Demo.pdf"
+                <motion.a
+                  href="/CV/Umar CV DS.pdf"
                   download="Umar_Ahamed_CV.pdf"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -160,7 +160,7 @@ export default function Home() {
             </motion.div>
 
             {/* Dashboard Cards Grid */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -171,13 +171,13 @@ export default function Home() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue to-brand-gold opacity-50 group-hover:opacity-100 transition-opacity"></div>
                 <h3 className="text-xs text-gray-400 uppercase tracking-widest mb-4 text-left">Data Pipeline</h3>
                 <div className="flex justify-between items-center text-sm font-medium">
-                  <div className="flex flex-col items-center"><FaDatabase className="text-brand-blue mb-2 text-xl"/> Source</div>
+                  <div className="flex flex-col items-center"><FaDatabase className="text-brand-blue mb-2 text-xl" /> Source</div>
                   <div className="text-gray-500">→</div>
-                  <div className="flex flex-col items-center"><FaCogs className="text-gray-300 mb-2 text-xl"/> ETL</div>
+                  <div className="flex flex-col items-center"><FaCogs className="text-gray-300 mb-2 text-xl" /> ETL</div>
                   <div className="text-gray-500">→</div>
-                  <div className="flex flex-col items-center"><FaCloudUploadAlt className="text-gray-300 mb-2 text-xl"/> Warehouse</div>
+                  <div className="flex flex-col items-center"><FaCloudUploadAlt className="text-gray-300 mb-2 text-xl" /> Warehouse</div>
                   <div className="text-gray-500">→</div>
-                  <div className="flex flex-col items-center"><FaChartBar className="text-brand-gold mb-2 text-xl"/> Analytics</div>
+                  <div className="flex flex-col items-center"><FaChartBar className="text-brand-gold mb-2 text-xl" /> Analytics</div>
                 </div>
               </div>
 
@@ -203,8 +203,8 @@ export default function Home() {
                 <h3 className="text-xs text-gray-400 uppercase tracking-widest mb-auto text-left">Performance</h3>
                 <div className="flex items-end justify-between space-x-2 h-16 w-full px-2">
                   {[40, 70, 45, 90, 65, 80].map((h, i) => (
-                    <motion.div 
-                      key={i} 
+                    <motion.div
+                      key={i}
                       initial={{ height: 0 }}
                       animate={{ height: `${h}%` }}
                       transition={{ duration: 1, delay: 0.5 + (i * 0.1) }}
@@ -219,14 +219,14 @@ export default function Home() {
         </div>
 
         {/* Bottom Feature Strip */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
         >
           {featureCards.map((card, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               whileHover={{ y: -5, backgroundColor: "rgba(10, 110, 211, 0.1)" }}
               className="glass-card p-4 rounded-lg flex flex-col items-center justify-center text-center space-y-3 cursor-pointer group"

@@ -82,7 +82,7 @@ export default function Navbar() {
               </a>
             ))}
             <motion.a
-              href="/CV/Umar CV DS Demo.pdf"
+              href="/CV/Umar CV DS.pdf"
               download="Umar_Ahamed_CV.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
