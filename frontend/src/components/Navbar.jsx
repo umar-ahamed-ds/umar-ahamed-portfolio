@@ -5,8 +5,8 @@ import { FiMenu, FiX } from 'react-icons/fi';
 const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
   { name: 'Experience', href: '#experience' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -14,6 +14,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,27 @@ export default function Navbar() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -80% 0px' }
+    );
+
+    navLinks.forEach((link) => {
+      const id = link.href.substring(1);
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -47,10 +69,16 @@ export default function Navbar() {
               <a
                 key={index}
                 href={link.href}
-                className="text-gray-300 hover:text-white transition-colors duration-300 relative group text-sm font-medium"
+                className={`transition-colors duration-300 relative group text-sm font-medium ${
+                  activeSection === link.href.substring(1)
+                    ? 'text-brand-gold glow-text-gold'
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-brand-blue transition-all duration-300 group-hover:w-full glow-blue"></span>
+                <span className={`absolute -bottom-1 left-0 h-[2px] bg-brand-blue transition-all duration-300 glow-blue ${
+                  activeSection === link.href.substring(1) ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}></span>
               </a>
             ))}
             <motion.a
@@ -90,7 +118,11 @@ export default function Navbar() {
                 <a
                   key={index}
                   href={link.href}
-                  className="block w-full text-center py-3 text-gray-300 hover:text-white hover:bg-brand-blue/10 rounded-md transition-colors"
+                  className={`block w-full text-center py-3 rounded-md transition-colors ${
+                    activeSection === link.href.substring(1)
+                      ? 'text-brand-gold bg-brand-blue/10 font-bold'
+                      : 'text-gray-300 hover:text-white hover:bg-brand-blue/10'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}

@@ -13,8 +13,8 @@ function App() {
       <main>
         <Home />
         <About />
-        <Skills />
         <Projects />
+        <Skills />
         <Experience />
         <Contact />
       </main>
