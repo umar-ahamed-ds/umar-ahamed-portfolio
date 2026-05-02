@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 const navLinks = [
-  { name: 'Home', href: '#' },
-  { name: 'About', href: '#' },
-  { name: 'Skills', href: '#' },
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Experience', href: '#' },
-  { name: 'Contact', href: '#' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
@@ -53,13 +53,15 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-brand-blue transition-all duration-300 group-hover:w-full glow-blue"></span>
               </a>
             ))}
-            <motion.button
+            <motion.a
+              href="/CV/Umar CV DS Demo.pdf"
+              download="Umar_Ahamed_CV.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-5 py-2 rounded-full bg-brand-blue/20 border border-brand-blue text-brand-blue font-medium hover:bg-brand-blue hover:text-white transition-all duration-300 glow-blue"
+              className="px-5 py-2 rounded-full bg-brand-blue/20 border border-brand-blue text-brand-blue font-medium hover:bg-brand-blue hover:text-white transition-all duration-300 glow-blue text-center"
             >
               Download CV
-            </motion.button>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,9 +96,13 @@ export default function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <button className="mt-4 w-full px-5 py-3 rounded-md bg-brand-blue/20 border border-brand-blue text-brand-blue font-medium hover:bg-brand-blue hover:text-white transition-all duration-300">
+              <a 
+                href="/CV/Umar CV DS Demo.pdf" 
+                download="Umar_Ahamed_CV.pdf"
+                className="mt-4 w-full block text-center px-5 py-3 rounded-md bg-brand-blue/20 border border-brand-blue text-brand-blue font-medium hover:bg-brand-blue hover:text-white transition-all duration-300"
+              >
                 Download CV
-              </button>
+              </a>
             </div>
           </motion.div>
         )}

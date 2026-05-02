@@ -20,7 +20,7 @@ export default function Home() {
   ];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20">
+    <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20">
       {/* Background Particles */}
       <Particles
         id="tsparticles"
@@ -147,13 +147,15 @@ export default function Home() {
                 >
                   Explore Projects
                 </motion.button>
-                <motion.button 
+                <motion.a 
+                  href="/CV/Umar CV DS Demo.pdf"
+                  download="Umar_Ahamed_CV.pdf"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 rounded-md glass-card text-brand-gold font-bold tracking-wide hover:bg-brand-gold/10 transition-colors"
+                  className="inline-flex justify-center items-center px-8 py-3 rounded-md glass-card text-brand-gold font-bold tracking-wide hover:bg-brand-gold/10 transition-colors"
                 >
                   Download CV
-                </motion.button>
+                </motion.a>
               </div>
             </motion.div>
 
